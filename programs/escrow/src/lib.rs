@@ -43,4 +43,14 @@ pub mod escrow {
 
         Ok(())
     }
+    
+    pub fn refund(ctx: Context<Refund>) -> Result<()> {
+        ctx.accounts.refund_and_close_vault()?;
+        emit!(RefundEvent {
+            maker: ctx.accounts.maker.key(),
+            mint_a: ctx.accounts.mint_a.key(),
+        });
+
+        Ok(())
+    }
 }

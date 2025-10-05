@@ -160,6 +160,18 @@ describe("escrow", () => {
   
     });
 
+    xit("Refund", async () => {
+        const tx = await program.methods
+        .refund()
+        .accounts({ ...accounts })
+        .signers([maker])
+        .rpc()
+        .then(confirm)
+        .then(log);
+    
+        console.log("Refund Completed", tx);
+      });
+
   after("cleanup event listeners", async () => {
     for (const id of listenerIds) {
       await program.removeEventListener(id);

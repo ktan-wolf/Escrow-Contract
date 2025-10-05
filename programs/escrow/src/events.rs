@@ -17,3 +17,9 @@ pub struct TakeEvent{
     pub mint_b: Pubkey,
     pub receive_amt: u64
 }
+
+#[event]
+pub struct RefundEvent {
+    pub maker: Pubkey,
+    pub mint_a: Pubkey,
+}
