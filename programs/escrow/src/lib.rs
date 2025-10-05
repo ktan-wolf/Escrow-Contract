@@ -28,4 +28,19 @@ pub mod escrow {
 
         Ok(())
     }
+
+    pub fn take(ctx: Context<Take>) -> Result<()> {
+        ctx.accounts.transfer_to_maker()?;
+        ctx.accounts.withdraw_and_close_vault()?;
+
+        emit!(TakeEvent{
+            maker: ctx.accounts.maker.key(),
+            taker: ctx.accounts.taker.key(),
+            mint_a: ctx.accounts.mint_a.key(),
+            mint_b: ctx.accounts.mint_b.key(),
+            receive_amt: ctx.accounts.escrow.receive_amt,
+        });
+
+        Ok(())
+    }
 }

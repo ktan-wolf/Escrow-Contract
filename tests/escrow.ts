@@ -142,6 +142,24 @@ describe("escrow", () => {
 
   });
 
+  it("Take", async () => {
+      try{
+        const tx = await program.methods
+          .take()
+          .accounts({ ...accounts })
+          .signers([taker])
+          .rpc()
+          .then(confirm)
+          .then(log);
+  
+      console.log("take confirmed", tx);
+      }catch(e){
+        console.log(e);
+        throw(e);
+      };
+  
+    });
+
   after("cleanup event listeners", async () => {
     for (const id of listenerIds) {
       await program.removeEventListener(id);
